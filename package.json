@@ -1,0 +1,22 @@
+{
+  "name": "numan-cmd",
+  "version": "1.0.0",
+  "description": "This package is used to run cmd commands. It uses child_process internally.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cd-sigma/numan-cmd.git"
+  },
+  "keywords": [
+    "cmd"
+  ],
+  "author": "zeus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cd-sigma/numan-cmd/issues"
+  },
+  "homepage": "https://github.com/cd-sigma/numan-cmd#readme"
+}
