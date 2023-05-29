@@ -1,9 +1,9 @@
 const {spawn} = require("child_process");
 
-async function runSync(command) {
+async function runSync(command,options={},timeout) {
     return new Promise((resolve, reject) => {
         try {
-            const child = spawn(command, {shell: true, maxBuffer: 1024 * 1024});
+            const child = spawn(command, options);
 
             let data = "", stderr = "";
 
@@ -18,9 +18,21 @@ async function runSync(command) {
 
             child.on("exit", (code) => {
                 resolve({
-                    data: data ? data : null, stderr: stderr ? stderr : null,
+                    data: data ? data : null, stderr: stderr ? stderr : null , timedOut: false
                 });
+                return;
             });
+
+            //for processes which never exit
+            if (timeout) {
+                setTimeout(() => {
+                    child.kill();
+                    resolve({
+                        data: data ? data : null, stderr: stderr ? stderr : null, timedOut: true
+                    });
+                    return;
+                }, timeout);
+            }
         } catch (error) {
             reject(error);
         }
